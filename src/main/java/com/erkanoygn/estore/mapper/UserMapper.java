@@ -31,9 +31,7 @@ public class UserMapper {
     }
 
     public static User mapToUser(UserDto userDto){
-
         User user = new User();
-
         user.setId(userDto.getId());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
@@ -46,6 +44,18 @@ public class UserMapper {
         user.setBirthDate(userDto.getBirthDate());
         user.setHomeAddress(userDto.getHomeAddress());
 
+        if(userDto.getProductIds() != null) {
+            List<Product> products = userDto.getProductIds().stream()
+                    .map(productId -> {
+                        Product product = new Product();
+                        product.setId(productId);
+                        return product;
+                    })
+                    .collect(Collectors.toList());
+            user.setProducts(products);
+        }
+
         return user;
     }
+
 }
