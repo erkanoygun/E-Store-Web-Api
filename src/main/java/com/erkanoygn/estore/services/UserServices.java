@@ -1,5 +1,6 @@
 package com.erkanoygn.estore.services;
 
+import com.erkanoygn.estore.dto.ProductDto;
 import com.erkanoygn.estore.dto.UserDto;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface UserServices {
     void deleteProductById(Long userId,Long productId);
 
     void addProduct(Long userId, Long productId);
+
+    public List<ProductDto> getAllUserProductsByUserId(Long userId);
 }

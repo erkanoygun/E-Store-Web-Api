@@ -1,6 +1,8 @@
 package com.erkanoygn.estore.controller;
 
+import com.erkanoygn.estore.dto.ProductDto;
 import com.erkanoygn.estore.dto.UserDto;
+import com.erkanoygn.estore.services.ProductServices;
 import com.erkanoygn.estore.services.UserServices;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -58,5 +60,11 @@ public class UserController {
     public ResponseEntity<String> addProductToUserById(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
         userServices.addProduct(userId, productId);
         return ResponseEntity.ok("Product with id " + productId + " of user with id " + userId + " added successfully");
+    }
+
+    @GetMapping("products/{id}")
+    public ResponseEntity<List<ProductDto>> getAllUserProducts(@PathVariable("id") Long userId){
+        List<ProductDto> products = userServices.getAllUserProductsByUserId(userId);
+        return ResponseEntity.ok(products);
     }
 }

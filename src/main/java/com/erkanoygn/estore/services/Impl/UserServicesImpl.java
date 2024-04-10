@@ -1,9 +1,11 @@
 package com.erkanoygn.estore.services.Impl;
 
+import com.erkanoygn.estore.dto.ProductDto;
 import com.erkanoygn.estore.dto.UserDto;
 import com.erkanoygn.estore.entitiy.Product;
 import com.erkanoygn.estore.entitiy.User;
 import com.erkanoygn.estore.exception.ResourceNotFoundException;
+import com.erkanoygn.estore.mapper.ProductMapper;
 import com.erkanoygn.estore.mapper.UserMapper;
 import com.erkanoygn.estore.repository.ProductRepository;
 import com.erkanoygn.estore.repository.UserRepository;
@@ -104,5 +106,19 @@ public class UserServicesImpl implements UserServices {
         user.setProducts(products);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public List<ProductDto> getAllUserProductsByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+        List<Product> products = user.getProducts();
+
+        List<ProductDto> productDtos = products.stream()
+                .map(ProductMapper::mapToProductDto)
+                .collect(Collectors.toList());
+
+        return productDtos;
     }
 }
