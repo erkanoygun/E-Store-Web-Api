@@ -22,10 +22,10 @@ public class ProductMapper {
         Product product = new Product();
 
         product.setId(productDto.getId());
-        product.setName(product.getName());
-        product.setDescription(product.getDescription());
+        product.setName(productDto.getName());
+        product.setDescription(productDto.getDescription());
         product.setProductType(productDto.getProductType());
-        product.setStock(product.getStock());
+        product.setStock(productDto.getStock());
         product.setPrice(productDto.getPrice());
 
         return product;

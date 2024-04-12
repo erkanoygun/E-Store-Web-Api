@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("deleteProduct/{userId}/{productId}")
-    public ResponseEntity<String> deleteProductById(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
+    public ResponseEntity<String> deleteProductToUserById(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
         userServices.deleteProductById(userId, productId);
         return ResponseEntity.ok("Product with id " + productId + " of user with id " + userId + " deleted successfully");
     }
